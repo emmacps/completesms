@@ -68,6 +68,45 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
+    function enquiry_category($param1 = '', $param2 = '', $param3 = ''){
 
+      if($param1 == 'insert'){
+
+      $page_data['category'] = $this->input->post('category');
+      $page_data['purpose'] = $this->input->post('purpose');
+      $page_data['whom'] = $this->input->post('whom');
+
+      $this->db->insert('enquiry_category', $page_data);
+      $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+      redirect(base_url(). 'admin/enquiry_category', 'refresh');
+
+    }
+
+    if($param1 == 'update'){
+      $page_data['category'] = $this->input->post('category');
+      $page_data['purpose'] = $this->input->post('purpose');
+      $page_data['whom'] = $this->input->post('whom');
+
+      $this->db->where('enquiry_category_id', $param2);
+      $this->db->update('enquiry_category', $page_data);
+      $this->session->set_flashdata('flash_message', get_phrase('Data Updated Successfully'));
+      redirect(base_url(). 'admin/enquiry_category', 'refresh');
+
+    }
+
+    if($param1 == 'delete'){
+      $this->db->where('enquiry_category_id', $param2);
+      $this->db->delete('enquiry_category');
+      $this->session->set_flashdata('flash_message', get_phrase('Data Deleted Successfully'));
+      redirect(base_url(). 'admin/enquiry_category', 'refresh');
+
+    }
+
+    $page_data['page_name'] = 'enquiry_category';
+    $page_data['page_title'] =  get_phrase('Manage Category');
+    $page_data['enquiry_category'] = $this->db->get('enquiry_category')->result_array();
+    $this->load->view('backend/index', $page_data);
+
+  }
 
 }
