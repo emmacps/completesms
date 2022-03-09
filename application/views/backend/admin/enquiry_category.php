@@ -24,9 +24,9 @@
              </thead>
 
              <tbody>
-    <?php foreach ($enquiry_category as $key => $row):?>
+    <?php $count = 1; foreach ($enquiry_category as $key => $row):?>
              <tr>
-                    <td><?php echo $row['enquiry_category_id'];?></td>
+                    <td><?php echo $count++;?></td>
                     <td><?php echo $row['category'];?></td>
                     <td><?php echo $row['purpose'];?></td>
                     <td><?php echo $row['whom'];?></td>

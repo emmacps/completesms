@@ -37,7 +37,7 @@ class Admin extends CI_Controller {
             $this->db->update('admin', $data);
             move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/admin_image/' . $this->session->userdata('admin_id') . '.jpg');
             $this->session->set_flashdata('flash_message', get_phrase('Info Updated'));
-            redirect(base_url() . 'admin/manage_profile', 'refresh');
+            redirect('admin/manage_profile', 'refresh');
         }
 
         if($param1 == 'change_password'){
@@ -63,46 +63,79 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
-    // enquiry crud function
+    // category enquiry crud function
     function enquiry_category($param1 = '', $param2 = '', $param3 = ''){
 
       if($param1 == 'insert'){
-
-      $page_data['category'] = $this->input->post('category');
-      $page_data['purpose'] = $this->input->post('purpose');
-      $page_data['whom'] = $this->input->post('whom');
-
-      $this->db->insert('enquiry_category', $page_data);
+      $this->crud_model->enquiry_cat();
       $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
       redirect('admin/enquiry_category', 'refresh');
-
     }
 
     if($param1 == 'update'){
-      $page_data['category'] = $this->input->post('category');
-      $page_data['purpose'] = $this->input->post('purpose');
-      $page_data['whom'] = $this->input->post('whom');
-
-      $this->db->where('enquiry_category_id', $param2);
-      $this->db->update('enquiry_category', $page_data);
+      $this->crud_model->update_cat($param2);
       $this->session->set_flashdata('flash_message', get_phrase('Data Updated Successfully'));
       redirect('admin/enquiry_category', 'refresh');
-
     }
 
     if($param1 == 'delete'){
-      $this->db->where('enquiry_category_id', $param2);
-      $this->db->delete('enquiry_category');
+      $this->crud_model->delete_cat($param2);
       $this->session->set_flashdata('flash_message', get_phrase('Data Deleted Successfully'));
-      redirect(base_url(). 'admin/enquiry_category', 'refresh');
-
+      redirect('admin/enquiry_category', 'refresh');
     }
 
     $page_data['page_name'] = 'enquiry_category';
     $page_data['page_title'] =  get_phrase('Manage Category');
     $page_data['enquiry_category'] = $this->db->get('enquiry_category')->result_array();
     $this->load->view('backend/index', $page_data);
-
   }
+
+  // list enquiry function
+  function list_enquiry($param1 = '', $param2 = '', $param3 = ''){
+
+    if($param1 == 'delete'){
+      $this->crud_model->delete_enquire($param2);
+      $this->session->set_flashdata('flash_message', get_phrase('Data Deleted Successfully'));
+      redirect('admin/list_enquiry', 'refresh');
+    }
+
+    $page_data['page_name'] = 'list_enquiry';
+    $page_data['page_title'] =  get_phrase('All Enquiries');
+    $page_data['select_enquiry'] = $this->db->get('enquiry')->result_array();
+    $this->load->view('backend/index', $page_data);
+  }
+
+        // school clud crud function
+        function club($param1 = '', $param2 = '', $param3 = ''){
+
+          if($param1 == 'insert'){
+          $this->crud_model->add_club();
+          $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+          redirect('admin/club', 'refresh');
+          }
+
+          if($param1 == 'update'){
+            $this->crud_model->edit_club($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+            redirect('admin/club', 'refresh');
+
+          }
+
+          if($param1 == 'delete'){
+            $this->crud_model->del_club($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data Deleted Successfully'));
+            redirect('admin/club', 'refresh');
+          }
+
+          $page_data['page_name'] = 'club';
+          $page_data['page_title'] =  get_phrase('Manage Club');
+          $page_data['select_club'] = $this->db->get('club')->result_array();
+          $this->load->view('backend/index', $page_data);
+        }
+
+
+
+
+
 
 }

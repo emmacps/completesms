@@ -41,7 +41,7 @@
                         <ul class="nav nav-second-level <?php
 
                         if($page_name == 'enquiry_category' ||
-                           $page_name == 'enqiury' ||
+                           $page_name == 'list_enqiury' ||
                            $page_name == 'club' ||
                            $page_name == 'circular' ||
                            $page_name == 'help_link' ||
@@ -62,8 +62,8 @@
                                 </a>
                             </li>
 
-                            <li class="<?php if ($page_name == 'enquiry') echo 'active'; ?> ">
-                                <a href="<?php echo base_url(); ?>admin/enquiry">
+                            <li class="<?php if ($page_name == 'list_enquiry') echo 'active'; ?> ">
+                                <a href="<?php echo base_url(); ?>admin/list_enquiry">
                                 <i class="fa fa-angle-double-right p-r-10"></i>
                                     <span class="hide-menu"><?php echo get_phrase('view_enquiries'); ?></span>
                                 </a>

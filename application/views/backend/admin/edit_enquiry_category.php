@@ -15,14 +15,12 @@ foreach ($select_information as $key => $category):
 <div class="panel-body">
 
 <?php echo form_open(base_url().'admin/enquiry_category/update/'. $category['enquiry_category_id'], array('class' => 'form-horizontal form-groups-bordered validate', 'enctype'=>'multipart/form-data'));?>
-
-
  					<div class="form-group">
-                 	<label class="col-md-12" for="example-text">category</label>
-                    <div class="col-sm-12">
-                            <input type="text" name="category" value="<?php echo $category['category'];?>" class="form-control">
-                        </div>
-                    </div>
+              <label class="col-md-12" for="example-text">category</label>
+              <div class="col-sm-12">
+                  <input type="text" name="category" value="<?php echo $category['category'];?>" class="form-control">
+              </div>
+          </div>
 
 					<div class="form-group">
                  	<label class="col-md-12" for="example-text">purpose</label>
@@ -41,7 +39,7 @@ foreach ($select_information as $key => $category):
                     </div>
 
                     <div class="form-group">
-							<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Save</button>
+							<button type="submit" class="btn btn-info btn-block btn-rounded btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Update</button>
 					</div>
 			<?php echo form_close();?>
 
