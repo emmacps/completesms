@@ -1,31 +1,29 @@
 <?php if (!defined('BASEPATH'))exit('No direct script access allowed');
 
-
+// Starting login controller
 class Login extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-
-		$this->load->database();
-		$this->load->library('session');
     }
 
-
+    // load login index page
     public function index() {
-        if($this->session->userdata('admin_login') == 1) redirect(base_url(). 'admin/dashboard', 'refresh');
+        if($this->session->userdata('admin_login') == 1) redirect('admin/dashboard', 'refresh');
         $this->load->view('backend/login');
     }
 
-    function check_login() {
+    // check login function
+    public function check_login() {
         $this->login_model->adminLoginFunction();
         $this->session->set_flashdata('flash_message', get_phrase('Successfully Login'));
-        redirect(base_url() . 'admin/dashboard', 'refresh');
+        redirect('admin/dashboard', 'refresh');
      }
 
+     // logout user
      function logout(){
-
         $this->session->sess_destroy();
-        redirect(base_url(). 'login', 'refresh');
+        redirect('login', 'refresh');
      }
 
 

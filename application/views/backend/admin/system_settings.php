@@ -45,13 +45,12 @@
                         <label class="col-md-12" for=""><?php echo get_phrase('Language'); ?></label>
                         <div class="col-sm-12">
                             <select name="language" class="form-control">
-                            <?php                          
+                            <?php
                             $getLanguage = $this->db->list_fields('language');
                             foreach($getLanguage as $key => $field) {
                                 if($field == 'phrase_id' || $field == 'phrase')
                                     continue;
-                                    $default_language = $this->db->get_where('settings', array('type' => 'language'))->row()->description;
-                                
+                                    $default_language = $this->db->get_where('settings', array('type' => 'language'))->row()->description;              
                             ?>
                             <option value="<?php echo $field; ?>" <?php if($default_language == $field) echo 'selected'; ?> >
                                 <?php echo $field; ?>
@@ -73,7 +72,7 @@
                         <select name="text_align" class="form-control">
                             <?php $align = $this->db->get_where('settings', array('type' => 'text_align'))->row()->description; ?>
                             <option value="left-to-right" <?php if ($align == 'left-to-right') echo 'selected';?> > Left to right </option>
-                            <option value="right-to-right" <?php if ($align == 'right-to-right') echo 'selected';?> > Right to right </option>     
+                            <option value="right-to-right" <?php if ($align == 'right-to-right') echo 'selected';?> > Right to right </option>
                         </select>
                         </div>
                     </div>
@@ -102,20 +101,20 @@
             <div class="panel-body table-responsive">
 
             <?php echo form_open(base_url() . 'systemsetting/system_settings/upload_logo', array('class' => 'form-horizontal form-groups-bordered validate', 'target' => '_top', 'enctype' => 'multipart/form-data'));
-            ?>			
-                        <div class="form-group"> 
-                        <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>        
+            ?>
+                        <div class="form-group">
+                        <label class="col-sm-12"><?php echo get_phrase('browse_image');?>*</label>
                         <div class="col-sm-12">
                         <input type='file' class="form-control" name="userfile" onChange="readURL(this);" required>
                         <img id="blah" src="<?php echo base_url(); ?>uploads/logo.png" alt="" height="200" width="200"/>
                         </div>
-                        </div>	
-                        
+                        </div>
+
                     <div class="form-group">
                         <button class="btn btn-block btn-info btn-rounded btn-sm"><i class="fa fa-save"></i>&nbsp;<?php echo get_phrase('Update Logo');?></button>
-                    
+
                     </div>
-            
+
                     <?php echo form_close(); ?>
             </div>
             </div>

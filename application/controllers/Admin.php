@@ -1,24 +1,22 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-
+// starting admin controller
 class Admin extends CI_Controller {
 
     function __construct() {
         parent::__construct();
         		$this->load->database();
                 $this->load->library('session');
-
     }
 
-    public function index()
-	{
+    // load admin index page
+    public function index(){
         if($this->session->userdata('admin_login') != 1) redirect(base_url(). 'login', 'refresh');
         if($this->session->userdata('admin_login') == 1) redirect(base_url(). 'admin/dashboard', 'refresh');
-
     }
 
+    // load admin dashboard
     public function dashboard() {
-
         if($this->session->userdata('admin_login') != 1) redirect(base_url(). 'login', 'refresh');
 
        	$page_data['page_name'] = 'dashboard';
@@ -26,7 +24,7 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
-
+    // manage profile crud
     public function manage_profile($param1 = '', $param2 = '', $param3 = ''){
 
         if ($this->session->userdata('admin_login') != 1) redirect(base_url(), 'refresh');
@@ -40,7 +38,6 @@ class Admin extends CI_Controller {
             move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/admin_image/' . $this->session->userdata('admin_id') . '.jpg');
             $this->session->set_flashdata('flash_message', get_phrase('Info Updated'));
             redirect(base_url() . 'admin/manage_profile', 'refresh');
-
         }
 
         if($param1 == 'change_password'){
@@ -54,12 +51,10 @@ class Admin extends CI_Controller {
                 $this->db->where('admin_id', $this->session->userdata('admin_id'));
                 $this->db->update('admin', array('password' => $data['new_password']));
                 $this->session->set_flashdata('flash_message', get_phrase('Password Changed'));
-            }
-
-            else{
+            } else{
                 $this->session->set_flashdata('error_message', get_phrase('Password Not changed'));
             }
-            redirect(base_url() . 'admin/manage_profile', 'refresh');
+            redirect('admin/manage_profile', 'refresh');
         }
 
         $page_data['page_name'] = 'manage_profile';
@@ -68,6 +63,7 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
+    // enquiry crud function
     function enquiry_category($param1 = '', $param2 = '', $param3 = ''){
 
       if($param1 == 'insert'){
@@ -78,7 +74,7 @@ class Admin extends CI_Controller {
 
       $this->db->insert('enquiry_category', $page_data);
       $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
-      redirect(base_url(). 'admin/enquiry_category', 'refresh');
+      redirect('admin/enquiry_category', 'refresh');
 
     }
 
@@ -90,7 +86,7 @@ class Admin extends CI_Controller {
       $this->db->where('enquiry_category_id', $param2);
       $this->db->update('enquiry_category', $page_data);
       $this->session->set_flashdata('flash_message', get_phrase('Data Updated Successfully'));
-      redirect(base_url(). 'admin/enquiry_category', 'refresh');
+      redirect('admin/enquiry_category', 'refresh');
 
     }
 

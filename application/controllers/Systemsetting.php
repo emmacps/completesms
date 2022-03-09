@@ -1,24 +1,20 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-
-class Systemsetting extends CI_Controller { 
+// system settings controller
+class Systemsetting extends CI_Controller {
 
     function __construct(){
-
         parent::__construct();
-        $this->load->database();
-        $this->load->library('session');
-    
     }
 
+    // system settings crud function
     function system_settings($param1 = '', $param2 = '', $param3 = ''){
 
         if ($this->session->userdata('admin_login') != 1)
-        redirect(base_url() . 'login', 'refresh'); 
-
+        redirect('login', 'refresh');
 
         if ($param1 == 'do_update') {
-           
+
         $data['description']    =   $this->input->post('system_name');
         $this->db->where('type', 'system_name');
         $this->db->update('settings', $data);
@@ -59,20 +55,19 @@ class Systemsetting extends CI_Controller {
         $this->db->where('type', 'footer');
         $this->db->update('settings', $data);
 
-
         $this->session->set_flashdata('flash_message', get_phrase('Data Updated'));
-        redirect(base_url(). 'systemsetting/system_settings', 'refresh');
+        redirect('systemsetting/system_settings', 'refresh');
     }
 
      if ($param1 == 'upload_logo') {
        move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/logo.png');
        $this->session->set_flashdata('flash_message', get_phrase('Logo Uploaded'));
-       redirect(base_url() . 'systemsetting/system_settings', 'refresh');
+       redirect('systemsetting/system_settings', 'refresh');
     }
 
         $page_data['page_name']     = 'system_settings';
         $page_data['page_title']    =  get_phrase('System Settings');
-        $this->load->view('backend/index', $page_data); 
+        $this->load->view('backend/index', $page_data);
     }
 
 
