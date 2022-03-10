@@ -118,7 +118,6 @@ class Admin extends CI_Controller {
             $this->crud_model->edit_club($param2);
             $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
             redirect('admin/club', 'refresh');
-
           }
 
           if($param1 == 'delete'){
@@ -132,6 +131,119 @@ class Admin extends CI_Controller {
           $page_data['select_club'] = $this->db->get('club')->result_array();
           $this->load->view('backend/index', $page_data);
         }
+
+        // crud function for circular
+        function circular($param1 = '', $param2 = '', $param3 = ''){
+
+          if($param1 == 'insert'){
+          $this->crud_model->insert_circular();
+          $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+          redirect('admin/circular', 'refresh');
+          }
+
+          if($param1 == 'update'){
+            $this->crud_model->update_circular($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+            redirect('admin/circular', 'refresh');
+          }
+
+          if($param1 == 'delete'){
+            $this->crud_model->delete_circular($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data Deleted Successfully'));
+            redirect('admin/circular', 'refresh');
+          }
+
+          $page_data['page_name'] = 'circular';
+          $page_data['page_title'] =  get_phrase('Manage Circular');
+          $page_data['select_circular'] = $this->db->get('circular')->result_array();
+          $this->load->view('backend/index', $page_data);
+        }
+
+
+        // crud function for parents
+        function parent($param1 = '', $param2 = '', $param3 = ''){
+
+          if($param1 == 'insert'){
+          $this->crud_model->insert_parent();
+          $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+          redirect('admin/parent', 'refresh');
+          }
+
+          if($param1 == 'update'){
+            $this->crud_model->update_parent($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+            redirect('admin/parent', 'refresh');
+          }
+
+          if($param1 == 'delete'){
+            $this->crud_model->delete_parent($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data Deleted Successfully'));
+            redirect('admin/parent', 'refresh');
+          }
+
+          $page_data['page_name'] = 'parent';
+          $page_data['page_title'] =  get_phrase('Manage Parents');
+          $page_data['select_parent'] = $this->db->get('parent')->result_array();
+          $this->load->view('backend/index', $page_data);
+        }
+
+
+        // crud function for labrarian
+        function librarian($param1 = '', $param2 = '', $param3 = ''){
+
+          if($param1 == 'insert'){
+          $this->crud_model->insert_librarian();
+          $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+          redirect('admin/librarian', 'refresh');
+          }
+
+          if($param1 == 'update'){
+            $this->crud_model->update_librarian($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+            redirect('admin/librarian', 'refresh');
+          }
+
+          if($param1 == 'delete'){
+            $this->crud_model->delete_librarian($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data Deleted Successfully'));
+            redirect('admin/librarian', 'refresh');
+          }
+
+          $page_data['page_name'] = 'librarian';
+          $page_data['page_title'] =  get_phrase('Manage librarian');
+          $page_data['select_librarian'] = $this->db->get('librarian')->result_array();
+          $this->load->view('backend/index', $page_data);
+        }
+
+        // crud function for account
+        function librarian($param1 = '', $param2 = '', $param3 = ''){
+
+                  if($param1 == 'insert'){
+                  $this->crud_model->insert_librarian();
+                  $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+                  redirect('admin/librarian', 'refresh');
+                  }
+        
+                  if($param1 == 'update'){
+                    $this->crud_model->update_librarian($param2);
+                    $this->session->set_flashdata('flash_message', get_phrase('Data Saved Successfully'));
+                    redirect('admin/librarian', 'refresh');
+                  }
+
+                  if($param1 == 'delete'){
+                    $this->crud_model->delete_librarian($param2);
+                    $this->session->set_flashdata('flash_message', get_phrase('Data Deleted Successfully'));
+                    redirect('admin/librarian', 'refresh');
+                  }
+
+                  $page_data['page_name'] = 'librarian';
+                  $page_data['page_title'] =  get_phrase('Manage librarian');
+                  $page_data['select_librarian'] = $this->db->get('librarian')->result_array();
+                  $this->load->view('backend/index', $page_data);
+                }
+
+
+
 
 
 
