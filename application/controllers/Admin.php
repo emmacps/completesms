@@ -400,4 +400,41 @@ class Admin extends CI_Controller {
 
 
 
+    function teacher ($param1 = '', $param2 ='', $param3 =''){
+
+        if($param1 == 'insert'){
+            $this->teacher_model->insert_teacher();
+            $this->session->set_flashdata('flash_message', get_phrase('Data saved successfully'));
+            redirect(base_url(). 'admin/teacher', 'refresh');
+        }
+
+        if($param1 == 'update'){
+            $this->teacher_model->update_teacher($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data updated successfully'));
+            redirect(base_url(). 'admin/teacher', 'refresh');
+        }
+
+
+        if($param1 == 'delete'){
+            $this->teacher_model->delete_teacher($param2);
+            $this->session->set_flashdata('flash_message', get_phrase('Data deleted successfully'));
+            redirect(base_url(). 'admin/teacher', 'refresh');
+    
+            }
+
+
+        $page_data['page_name']     = 'teacher';
+        $page_data['page_title']    = get_phrase('Manage Teachers');
+        $page_data['select_teacher']  = $this->db->get('teacher')->result_array();
+        $this->load->view('backend/index', $page_data);
+
+    }
+
+
+    function get_designation($department_id = null)
+
+    $designation = $this->db->get_where('designation', array('department_id' => $department_id))->result_array();
+    foreach($designation as $key => $row)
+        echo '<option value="'.$row['designation_id'].'"></option'
+
 }
